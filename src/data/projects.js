@@ -1,0 +1,75 @@
+import { Monitor, Cpu, Bot, FileText, Eye, Share2 } from 'lucide-react';
+
+export const projects = [
+  {
+    id: 'kinect',
+    title: 'Kinect 教学系统',
+    category: '应用层',
+    description: '结合 Kinect v1 深度摄像头做的教学系统。支持手势操控网页，捏住滑动，捕捉手部坐标映射鼠标。',
+    icon: Eye,
+    color: 'text-blue-400',
+    demoType: 'interactive', // 特殊标记，用于触发手势控制演示
+    details: '本项目利用 Kinect v1 深度摄像头获取人体骨骼数据，通过坐标映射算法将手部位置转换为屏幕坐标，实现了隔空鼠标控制。系统包含手势识别模块（捏合、挥动）和平滑滤波算法，有效解决了抖动问题。',
+    mediaType: 'component', // 特殊组件展示
+  },
+  {
+    id: 'traffic',
+    title: '车流量分析监控平台',
+    category: '应用层',
+    description: '自训练图像识别模型，实时分析车流量数据。',
+    icon: Monitor,
+    color: 'text-green-400',
+    demoType: 'static',
+    details: '基于 YOLOv8 自训练模型，针对城市路口场景进行了数据集优化。平台后端采用 Flask，前端使用 Vue + ECharts 展示实时车流量统计、拥堵指数热力图以及车型分类占比。',
+    mediaType: 'image',
+    mediaUrl: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=1000', // 占位图
+  },
+  {
+    id: 'tang',
+    title: '智能体小唐',
+    category: '应用层',
+    description: '基于 LLM 制作的可培养型陪伴智能体。',
+    icon: Bot,
+    color: 'text-pink-400',
+    demoType: 'chat',
+    details: '集成了 LangChain 框架与本地部署的 ChatGLM 模型。小唐拥有长期记忆模块（Vector DB），能够记住用户的喜好与过往对话。支持性格培养系统，根据用户交互反馈动态调整回复语气。',
+    mediaType: 'image',
+    mediaUrl: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=1000',
+  },
+  {
+    id: 'doc-analysis',
+    title: '自动文档格式分析',
+    category: '应用层',
+    description: '基于 LLM 的文档格式检测与重构工具。',
+    icon: FileText,
+    color: 'text-yellow-400',
+    demoType: 'static',
+    details: '针对学术论文和公文格式，利用 LLM 进行语义分析与版面识别。能够自动检测字体、行距、标题层级错误，并根据预设模板自动重构文档格式，大幅提高排版效率。',
+    mediaType: 'image',
+    mediaUrl: 'https://images.unsplash.com/photo-1562564055-71e051d33c19?auto=format&fit=crop&q=80&w=1000',
+  },
+  {
+    id: 'densenet',
+    title: 'DenseNet-Inception 优化',
+    category: '算法层',
+    description: '密集连接神经网络结构设计和优化，针对 CIFAR-10 等数据集的高效图像识别。',
+    icon: Cpu,
+    color: 'text-purple-400',
+    demoType: 'academic',
+    details: '提出了一种混合网络架构，结合了 DenseNet 的特征复用优势与 Inception 的多尺度特征提取能力。在 CIFAR-10 数据集上，相比原版 DenseNet-121，参数量减少 15%，准确率提升 0.8%。',
+    mediaType: 'image',
+    mediaUrl: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=1000',
+  },
+  {
+    id: 'hypergraph',
+    title: '超图卷积 NLP 方法',
+    category: '算法层',
+    description: '融合节点-超边注意力机制，利用超图结构建模社交网络中文本语义传播关系。',
+    icon: Share2,
+    color: 'text-indigo-400',
+    demoType: 'academic',
+    details: '针对传统图神经网络无法有效建模高阶关联的问题，引入超图卷积网络（HGCN）。设计了节点-超边双向注意力机制，有效捕捉了社交网络中复杂的话题传播路径。',
+    mediaType: 'image',
+    mediaUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000',
+  }
+];
