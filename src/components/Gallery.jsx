@@ -7,6 +7,11 @@ const Gallery = ({ scrollRef }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
 
+  const handleProjectClick = (project) => {
+    console.log('Project clicked:', project);
+    setSelectedProject(project);
+  };
+
   return (
     <>
       <div 
@@ -134,7 +139,10 @@ const Gallery = ({ scrollRef }) => {
               </div>
 
               <button 
-                onClick={() => setSelectedProject(project)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleProjectClick(project);
+                }}
                 className="mt-6 w-full py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-sm font-bold transition-colors flex items-center justify-center gap-2 relative z-10"
               >
                 查看详情
