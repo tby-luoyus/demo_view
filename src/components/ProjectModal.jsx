@@ -4,13 +4,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink } from 'lucide-react';
 
 const ProjectModal = ({ project, onClose }) => {
-  // Always render AnimatePresence, handle conditional rendering inside or via parent
-  // But here we want to portal the whole thing.
-  
+  // Debug log
+  React.useEffect(() => {
+    if (project) console.log('Modal rendering for:', project.title);
+  }, [project]);
+
   return createPortal(
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {project && (
         <motion.div
+          key="modal-overlay"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -32,41 +35,55 @@ const ProjectModal = ({ project, onClose }) => {
               <X size={24} />
             </button>
 
-            {/* Left: Media / Demo Area */}
-            <div className="w-full md:w-3/5 bg-black relative flex items-center justify-center overflow-hidden border-b md:border-b-0 md:border-r border-gray-800">
-              {project.mediaType === 'component' && project.id === 'kinect' ? (
-                <div className="text-center p-8">
-                  <div className="w-32 h-32 mx-auto mb-6 rounded-full border-4 border-neon-blue flex items-center justify-center animate-pulse shadow-[0_0_30px_rgba(0,243,255,0.3)]">
-                    <project.icon size={64} className="text-neon-blue" />
+          {/* Left: Media / Demo Area */}
+          <div className="w-full md:w-3/5 bg-black relative flex items-center justify-center overflow-hidden border-b md:border-b-0 md:border-r border-gray-800">
+            {project.mediaType === 'component' && project.id === 'kinect' ? (
+              <div className="text-center p-8">
+                <div className="w-32 h-32 mx-auto mb-6 rounded-full border-4 border-neon-blue flex items-center justify-center animate-pulse shadow-[0_0_30px_rgba(0,243,255,0.3)]">
+                  <project.icon size={64} className="text-neon-blue" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">交互式体验中</h3>
+                <p className="text-gray-400 max-w-xs mx-auto">
+                  您当前正在使用摄像头进行手势控制。
+                  <br/>
+                  请尝试在主页使用手势滑动卡片。
+                </p>
+              </div>
+            ) : project.mediaType === 'video' ? (
+              <div className="w-full h-full relative group bg-black flex items-center justify-center">
+                {/* Use key to force re-render when url changes */}
+                <video 
+                  key={project.mediaUrl}
+                  src={project.mediaUrl} 
+                  controls 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="w-full h-full object-contain"
+                >
+                  您的浏览器不支持视频播放。
+                </video>
+              </div>
+            ) : (
+              <div className="w-full h-full relative group">
+                {project.mediaUrl ? (
+                  <img 
+                    src={project.mediaUrl} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center text-gray-600">
+                    <project.icon size={64} className="mb-4 opacity-50" />
+                    <span>暂无演示媒体</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">交互式体验中</h3>
-                  <p className="text-gray-400 max-w-xs mx-auto">
-                    您当前正在使用摄像头进行手势控制。
-                    <br/>
-                    请尝试在主页使用手势滑动卡片。
-                  </p>
-                </div>
-              ) : (
-                <div className="w-full h-full relative group">
-                  {project.mediaUrl ? (
-                    <img 
-                      src={project.mediaUrl} 
-                      alt={project.title} 
-                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center text-gray-600">
-                      <project.icon size={64} className="mb-4 opacity-50" />
-                      <span>暂无演示媒体</span>
-                    </div>
-                  )}
-                  {/* Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60" />
-                </div>
-              )}
-            </div>
-
-            {/* Right: Content Area */}
+                )}
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60" />
+              </div>
+            )}
+          </div>            {/* Right: Content Area */}
             <div className="w-full md:w-2/5 p-8 md:p-12 flex flex-col overflow-y-auto custom-scrollbar">
               <div className="mb-auto">
                 <div className="flex items-center gap-3 mb-6">

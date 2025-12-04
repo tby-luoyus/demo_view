@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { projects } from '../data/projects';
-import ProjectModal from './ProjectModal';
 
 const Gallery = ({ scrollRef }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const navigate = useNavigate();
 
   const handleProjectClick = (project) => {
     console.log('Project clicked:', project);
-    setSelectedProject(project);
+    navigate(`/project/${project.id}`);
   };
 
   return (
@@ -29,7 +29,7 @@ const Gallery = ({ scrollRef }) => {
           <br/><br/>
           这里汇集了在应用开发与算法研究领域的探索成果。
           <br/><br/>
-          👉 向右滑动（或使用手势）开始探索。
+          👉 向右滑动开始探索。
         </p>
       </div>
 
@@ -58,9 +58,10 @@ const Gallery = ({ scrollRef }) => {
               x: { duration: 0.4 },
               scale: { duration: 0.4 }
             }}
-            className={`relative group perspective-1000 snap-center flex-shrink-0 h-[70vh] antialiased
+            className={`relative group perspective-1000 snap-center flex-shrink-0 h-[70vh] antialiased cursor-pointer
               ${isHovered ? 'z-50' : 'z-0'}
             `}
+            onClick={() => handleProjectClick(project)}
             style={{
               minWidth: isHovered ? '700px' : '600px', // 增大基础尺寸
               zIndex: isHovered ? 50 : (isAnyHovered ? 40 - Math.abs(offset) : 0), // Ensure correct stacking
@@ -154,14 +155,9 @@ const Gallery = ({ scrollRef }) => {
 
       {/* End Card */}
       <div className="min-w-[300px] h-[70vh] snap-center flex items-center justify-center flex-shrink-0">
-        <p className="text-gray-500 font-mono">End of Gallery</p>
+        <p className="text-gray-500 font-mono">more.......</p>
       </div>
     </div>
-
-    <ProjectModal 
-      project={selectedProject} 
-      onClose={() => setSelectedProject(null)} 
-    />
     </>
   );
 };

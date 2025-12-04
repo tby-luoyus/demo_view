@@ -1,5 +1,7 @@
 import { Monitor, Cpu, Bot, FileText, Eye, Share2 } from 'lucide-react';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 export const projects = [
   {
     id: 'kinect',
@@ -10,19 +12,33 @@ export const projects = [
     color: 'text-blue-400',
     demoType: 'interactive', // 特殊标记，用于触发手势控制演示
     details: '本项目利用 Kinect v1 深度摄像头获取人体骨骼数据，通过坐标映射算法将手部位置转换为屏幕坐标，实现了隔空鼠标控制。系统包含手势识别模块（捏合、挥动）和平滑滤波算法，有效解决了抖动问题。',
-    mediaType: 'component', // 特殊组件展示
+    mediaType: 'video', // 改为视频展示
+    mediaUrl: `${BASE_URL}resources/Kinect 教学系统.mp4`,
   },
   {
     id: 'traffic',
     title: '车流量分析监控平台',
     category: '应用层',
-    description: '自训练图像识别模型，实时分析车流量数据。',
+    description: '基于融合神经网络 DenseNet-Inception 与 LSTM 的智慧交通识别系统，实时分析车流量与车牌信息。',
     icon: Monitor,
     color: 'text-green-400',
     demoType: 'static',
-    details: '基于 YOLOv8 自训练模型，针对城市路口场景进行了数据集优化。平台后端采用 Flask，前端使用 Vue + ECharts 展示实时车流量统计、拥堵指数热力图以及车型分类占比。',
-    mediaType: 'image',
-    mediaUrl: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=1000', // 占位图
+    details: `【智慧交通识别系统】
+    
+1. 背景与目标：
+随着城市化进程加速，传统交通管理难以应对庞大复杂的车流。本项目旨在打造一套高精度、强适应性的智慧交通识别系统，解决实时、精准管理的痛点。
+
+2. 核心技术栈：
+- 语言与框架：Python, Qt (LGPL协议) UI框架。
+- 算法模型：
+  * 创新性融合神经网络 DenseNet-Inception：结合 DenseNet 的特征复用与 Inception 的多尺度提取能力，实现高性能目标检测。
+  * 垂直投影算法：优化车牌定位与字符分割。
+  * LSTM 长短期记忆网络：处理时间序列数据，提升动态场景下的识别稳定性。
+
+3. 系统功能：
+实现交通数据的高效采集与智能分析，支持车流量统计、车型识别及车牌追踪，为智慧城市交通管理提供数据支撑。`,
+    mediaType: 'video',
+    mediaUrl: `${BASE_URL}resources/车流识别+牌识别视频演示.mp4`,
   },
   {
     id: 'tang',
@@ -38,15 +54,23 @@ export const projects = [
   },
   {
     id: 'doc-analysis',
-    title: '自动文档格式分析',
+    title: '智能文档平台',
     category: '应用层',
-    description: '基于 LLM 的文档格式检测与重构工具。',
+    description: '集成 OCR、版面分析与 LLM 的全链路文档处理系统，实现非结构化文档的智能解析与知识提取。',
     icon: FileText,
     color: 'text-yellow-400',
     demoType: 'static',
-    details: '针对学术论文和公文格式，利用 LLM 进行语义分析与版面识别。能够自动检测字体、行距、标题层级错误，并根据预设模板自动重构文档格式，大幅提高排版效率。',
-    mediaType: 'image',
-    mediaUrl: 'https://images.unsplash.com/photo-1562564055-71e051d33c19?auto=format&fit=crop&q=80&w=1000',
+    details: `【智能文档处理全流程】
+
+1. 核心能力：
+   - 多模态解析：融合 OCR 文字识别与计算机视觉技术，精准还原文档中的表格、公式及复杂排版。
+   - 语义理解：基于大语言模型（LLM）对文档内容进行深度理解，支持自动摘要、关键信息提取及合规性审查。
+   - 格式重构：一键将扫描件或混乱文档转换为标准格式（如 Word/Markdown），自动校正字体、行距与标题层级。
+
+2. 应用场景：
+   广泛应用于学术论文排版、企业合同审核、档案数字化管理等场景，大幅提升文档处理效率与准确率。`,
+    mediaType: 'video',
+    mediaUrl: `${BASE_URL}resources/智能文档平台.mp4`,
   },
   {
     id: 'densenet',
